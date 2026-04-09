@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks";
-import { catThunk } from "../../entities/cat/model/cat.thunks";
 import OneCat from "../../component/OneCat/OneCat";
-import './HomePage.css'
+import './FavoritePage.css'
 import { favoriteCat } from "../../entities/cat/model/cat.slice";
 
-export default function HomePage(): React.JSX.Element {
-  const cats = useAppSelector((str) => str.cat.cat);
+export default function FavoritePage(): React.JSX.Element {
+  const cats = useAppSelector((str) => str.cat.favoritesCat);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(catThunk());
     dispatch(favoriteCat())
   }, [dispatch]);
 
