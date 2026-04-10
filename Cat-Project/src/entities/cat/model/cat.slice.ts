@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { CatState } from "./cat.types";
-import { catThunk } from "./cat.thunks";
+import { catNextPageThunk, catThunk } from "./cat.thunks";
 import CatService from "../api/cat.service";
 
 const initialState: CatState = {
@@ -37,9 +37,26 @@ const catSlice = createSlice({
         state.error = "Error fetching cats";
         state.loading = false;
       });
+
+    build
+      .addCase(catNextPageThunk.fulfilled, (state, action) => {
+        if (state.cat) {
+          state.cat = [...state.cat, ...action.payload];
+        } else {
+          state.cat = action.payload;
+        }
+      })
+      .addCase(catNextPageThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(catNextPageThunk.rejected, (state) => {
+        state.error = "Error fetching cats";
+        state.loading = false;
+      });
   },
 });
 
-export const { favoriteCat, addFavoriteCat, removeFavoriteCat } = catSlice.actions;
+export const { favoriteCat, addFavoriteCat, removeFavoriteCat } =
+  catSlice.actions;
 
 export default catSlice.reducer;

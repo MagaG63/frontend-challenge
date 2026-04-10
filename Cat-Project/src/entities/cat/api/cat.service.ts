@@ -3,9 +3,9 @@ import type { Cat } from "../model/cat.types";
 import { CatsSchema } from "../model/cat.schemas";
 const STORAGE_KEY = "favoriteCats";
 class CatService {
-  static async fetchCat(): Promise<Cat[]> {
+  static async fetchCat(page: number = 0, limit: number = 10): Promise<Cat[]> {
     const { data } = await axios.get(
-      "https://api.thecatapi.com/v1/images/search?limit=10",
+      `https://api.thecatapi.com/v1/images/search?limit=${limit}&page=${page}`,
     );
     return CatsSchema.parse(data);
   }

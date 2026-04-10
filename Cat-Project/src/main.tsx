@@ -5,7 +5,7 @@ import App from "./App/App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/frontend-challenge">
       <App />
     </BrowserRouter>
   </StrictMode>

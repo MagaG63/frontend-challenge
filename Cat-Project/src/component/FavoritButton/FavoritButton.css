@@ -7,6 +7,37 @@
   padding: 0;
   cursor: pointer;
   z-index: 1;
+}
+
+.ImgButton {
   width: 48px;
   height: 48px;
+  transition: transform 0.3s ease;
+}
+
+.ImgButton.animate {
+  animation: heartBeat 0.4s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .ButtonCat {
+    right: 1%;
+    bottom: 1%;
+  }
+  .ImgButton {
+    width: 32px;
+    height: 32px;
+  }
 }

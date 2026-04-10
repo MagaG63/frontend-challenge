@@ -1,14 +1,14 @@
 .container {
   display: flex;
-  gap: 125px;
+  gap:  3vh 8.6vw;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 2vw;
-  flex-direction: row;
-  align-content: space-between;
+  justify-content: flex-start;
+  margin: 2vw 2.6vw;
+  box-sizing: border-box;
 }
 
-.oneItem{
-    display: inline-block;
-    position: relative;
+.oneItem {
+  display: inline-block;
+  position: relative;
 }
+

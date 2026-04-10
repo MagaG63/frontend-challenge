@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import nullfavoriteIcon from "../../shared/assets/favorite_border.svg";
 import favoriteIcon from "../../shared/assets/favorite.svg";
 import "./FavoritButton.css";
@@ -14,24 +14,30 @@ type Props = {
 };
 
 export default function FavoritButton({ cat }: Props): React.JSX.Element {
-  let result = nullfavoriteIcon;
+  const [animate, setAnimate] = useState(false);
   const dispatch = useAppDispatch();
   const isFavorite = useAppSelector((str) =>
     str.cat.favoritesCat?.find((item) => item.id === cat.id),
   );
-  if (isFavorite) {
-    result = favoriteIcon;
-  }
+  const result = isFavorite ? favoriteIcon : nullfavoriteIcon;
 
   const handleClick = () => {
+    setAnimate(true);
     if (isFavorite) {
       dispatch(removeFavoriteCat(cat));
-    } else dispatch(addFavoriteCat(cat));
+    } else {
+      dispatch(addFavoriteCat(cat));
+    }
+    setTimeout(() => setAnimate(false), 400);
   };
 
   return (
     <button className="ButtonCat" onClick={handleClick}>
-      <img className="imgButton" src={result} alt={result} />
+      <img 
+        className={`ImgButton ${animate ? "animate" : ""}`} 
+        src={result} 
+        alt="favorite" 
+      />
     </button>
   );
 }
